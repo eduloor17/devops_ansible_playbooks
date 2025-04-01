@@ -1,0 +1,34 @@
+######TO DO 
+#1) set templates
+#2) set varaibles
+#3) folders needed: /tasks, /vars, /templates
+
+#All this does is install things, no deep configurations and is more of a reference than anything
+
+- hosts: all # localhost
+  become: yes
+  tasks:
+      - name: Install Packages
+        apt: name={{ item }}
+        with_items:
+            - openjdk-17-jdk
+            - docker.io
+            #- postgresql postgresql-contrib
+
+      - name: Add Jenkins GPG key
+        shell: |
+          curl -fsSL https://pkg.jenkins.io/debian/jenkins.io-2023.key | tee /usr/share/keyrings/jenkins-keyring.asc > /dev/null
+        become: yes
+
+      - name: Add Jenkins repository
+        shell: |
+          echo "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/" | tee /etc/apt/sources.list.d/jenkins.list > /dev/null
+        become: yes
+
+      - name: Update APT and Install Jenkins
+        apt:
+          update_cache: yes
+          name: jenkins
+          state: present
+        become: yes
+
