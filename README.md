@@ -1,24 +1,39 @@
 # DevOps Ansible Playbooks
 
-## Step 1: Install Ansible on AWS Ubuntu EC2 instance
-	$ sudo apt update
-	$ sudo apt install software-properties-common
-	$ sudo apt-add-repository --yes --update ppa:ansible/ansible
-	$ sudo apt install ansible
-	$ sudo ansible --version
+## Step 1: Install Ansible on Debian GNU/Linux 12 (Raspberry Pi 5 Instance)
+### A. System Update
+ 	$ sudo apt update && sudo apt upgrade -y
+	$ sudo apt install -y software-properties-common python3-pip
 
-	Take a screenshot and name file as ansible_install.jpg
+##### PPA Warning: Raspberry Pi OS (Debian-based) does not support PPAs. Instead of adding the Ansible PPA, install Ansible from the official Debian repository or via pip.
 
-## Step 2: Run sample PlayBook1.yml
-	//Download PlayBook1.yml
-	$ sudo wget https://devops-f2021.s3.amazonaws.com/PlayBook1.yml
-	$ sudo ansible-playbook PlayBook1.yml
+### B. Install Ansible
+	$ sudo apt install -y ansible
+##### OR, if you need the latest Ansible version, use pip:
+	$ pip3 install --user ansible
+### C. Verify Ansible Installation
+	$ ansible --version
+##### Take the first screenshot and paste it in a word document.
 
-	Take a screenshot and name file as PlayBook1.jpg
+### D. Clone the Ansible Playbook Repository
+	$ git clone https://github.com/eduloor17/devops_ansible_playbooks.git
 
-## Step 3: Run barebones_ansible.yaml
-	//Download barebones_ansible.yaml
-	$ sudo wget https://devops-f2021.s3.amazonaws.com/barebones_ansible.yml
-	$ ansible-playbook barebones_ansible.yml
+## Step 2:Step 2: Run barebones_ansible.yaml to install java, docker and Jenkins
+### A. Run barebones_ansible.yaml
+	$ ansible-playbook -i localhost, --connection=local ~/devops_ansible_playbooks/tiger/barebones_ansible.yml
+##### Take the second screenshot and paste it in a word document.
 
-	Take a screenshot and name file as barebones_ansible.jpg
+### B. You can check by enter this: 
+	$ java -version
+	$ docker –version
+	$ sudo systemctl status docker
+	$ jenkins –version
+	$ sudo systemctl status Jenkins
+
+## Step 3: Run sample PlayBook1.yml
+### A. Run PlayBook1.yaml
+	$ ansible-playbook -i localhost, --connection=local ~/devops_ansible_playbooks/lion/PlayBook1.yml
+##### Take the third screenshot and paste it in a word document.
+
+### B. Check the folder that was created in your home directory 
+	$ ls -l $HOME/Desktop/
