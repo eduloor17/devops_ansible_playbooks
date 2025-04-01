@@ -15,8 +15,8 @@
         - name: Test local action
           command: echo "Hello World"
         - name: Create new folder
-          #Change your machine path
+          #This will create a new folder in your machine path
           #command: mkdir /Users/moxdroid/Documents/testAnsible
-          command: mkdir /home/eduardojloor/Desktop/devops-lab11
+          command: mkdir $HOME/Desktop/devops-lab11
 
     
